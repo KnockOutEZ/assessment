@@ -90,6 +90,13 @@
                   </span>
                 </a>
               </li>
+              <li class="mb-6">
+                <a @click="isVisible='suppliers'">
+                  <span class="fill-current h-5 w-5 text-gray-300 mx-auto hover:text-green-500 flex justify-center">
+                    <i class="fas float-center fa-users"></i>
+                  </span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -120,12 +127,16 @@
           <div v-show="isVisible==='profile'">
         <Profile/>
       </div>
-      <div v-show="isVisible==='products'" class="px-16 gap-8 grid md:grid-cols-4  2xl:grid-cols-6">
+      <div v-show="isVisible==='products'" class="md:px-16 gap-8 grid md:grid-cols-4  2xl:grid-cols-6">
           <Products v-for="product in products" :key="product"/>
       </div>
       
       <div class="" v-show="isVisible==='statistics'">
         <Statistics/>
+      </div>
+
+      <div v-show="isVisible==='suppliers'" class="md:px-16 gap-8 grid md:grid-cols-4  2xl:grid-cols-6">
+        <Supplier v-for="supplier in suppliers" :key="supplier"/>
       </div>
   </section>
       </div>
@@ -139,19 +150,22 @@
 import Products from '../components/Products.vue'
 import Profile from '../components/Profile.vue'
 import Statistics from '../components/Statistics.vue'
+import Supplier from '../components/Supplier.vue'
 
 export default {
 name:'Dashboard',
 data(){
     return {
         products:30,
+        suppliers:20,
         isVisible:"statistics"
     }
 },
 components:{
   Products,
   Profile,
-  Statistics
+  Statistics,
+  Supplier
   }
 }
 </script>
@@ -165,4 +179,5 @@ components:{
     overflow-y: scroll;
     height: 100%;
 }
+
 </style>

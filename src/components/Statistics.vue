@@ -1,8 +1,8 @@
 <template>
-  <div class="my-9 container mx-auto" data-aos-duration="1000" data-aos="fade-down">
+  <div class="my-8 container mx-auto" data-aos-duration="1000" data-aos="fade-down">
     <StatisticsCard/>
   </div>
-  <div class="my-9 container mx-auto" data-aos="zoom-in">
+  <div class="my-8 container mx-auto" data-aos="zoom-in">
     <Graph/>
   </div>
 </template>
@@ -25,6 +25,6 @@ components:{
 }
 </script>
 
-<style>
+<style >
 
 </style>
