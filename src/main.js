@@ -4,4 +4,8 @@ import router from './router'
 import store from './store'
 import VeeValidatePlugin from './includes/validation';
 
-createApp(App).use(store).use(router).use(VeeValidatePlugin).mount('#app')
+const app = createApp(App).use(store).use(router).use(VeeValidatePlugin)
+
+app.config.globalProperties.$BaseUrl = 'http://3.1.103.18/' 
+
+app.mount('#app')
