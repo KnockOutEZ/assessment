@@ -1,39 +1,69 @@
 <template>
-
-
-<div class="wrapper antialiased text-gray-900 my-10 ">
-<div>
-    
-    <img src="https://source.unsplash.com/random/350x350" alt=" random imgee" class="w-full object-cover object-center rounded-lg shadow-md">    
-    
- <div class="relative px-4 -mt-16">
-   <div class="bg-white p-6 rounded-lg shadow-lg">
-    <div class="flex items-baseline">
-      <span class="bg-green-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-        New
-      </span>
-      <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-    2 baths  &bull; 3 rooms
-  </div>  
+  <div class="text-gray-900 bg-gray-200">
+    <div class="p-4 flex">
+      <h1 class="text-3xl">Users</h1>
     </div>
-    
-    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">A random Title</h4>
- 
-  <div class="mt-1">
-    $1800
-    <span class="text-gray-600 text-sm">   /wk</span>
-  </div>
-  <div class="mt-4">
-    <span class="text-green-600 text-md font-semibold">4/5 ratings </span>
-    <span class="text-sm text-gray-600">(based on 234 ratings)</span>
-  </div>  
-  </div>
- </div>
-  
-</div>
+    <div class="px-3 py-4 flex justify-center">
+      <table class="w-full text-md bg-white shadow-md rounded mb-4">
+        <tbody>
+          <tr class="border-b">
+            <th class="text-left p-3 px-5">Name</th>
+            <th class="text-left p-3 px-5">Email</th>
+            <th class="text-left p-3 px-5">Role</th>
+            <th></th>
+          </tr>
+
+          <tr  v-for="customer in customers" :key="customer.id" class="border-b hover:bg-orange-100 bg-gray-100">
+            <td class="p-3 px-5">
+              <input type="text" :value="customer.title" class="bg-transparent" />
+            </td>
+            <td class="p-3 px-5">
+              <input type="text" value="user.email" class="bg-transparent" />
+            </td>
+            <td class="p-3 px-5">
+              <input type="text" value="user.email" class="bg-transparent" />
+            </td>
+            <td class="p-3 px-5 flex justify-end">
+              <button
+                type="button"
+                class="
+                  mr-3
+                  text-sm
+                  bg-blue-500
+                  hover:bg-blue-700
+                  text-white
+                  py-1
+                  px-2
+                  rounded
+                  focus:outline-none
+                  focus:shadow-outline
+                "
+              >
+                Save</button
+              ><button
+                type="button"
+                class="
+                  text-sm
+                  bg-red-500
+                  hover:bg-red-700
+                  text-white
+                  py-1
+                  px-2
+                  rounded
+                  focus:outline-none
+                  focus:shadow-outline
+                "
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
- <!-- component
+  <!-- component
 <div class="flex flex-col h-min w-56 p-1 border-box bg-white rounded xl my-2">
         <div class="flex rounded flex-col w-ful w-full h-48 bg-gray-200 image">
             <br>
@@ -52,17 +82,23 @@
 
 <script>
 export default {
-name:'Products'
-}
+  name: "Products",
+  data(){
+    return{
+      products:20
+    }
+  },
+  props:{
+    customers:{
+      type:Array
+    }
+  }
+};
 </script>
 
 <style scoped>
-.wrapper{
-  display:grid;
-  place-items:center
+.wrapper {
+  display: grid;
+  place-items: center;
 }
-
-
-
-
 </style>

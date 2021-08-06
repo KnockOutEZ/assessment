@@ -12,10 +12,10 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <a v-show="$store.state.isAuthenticated === false" class="px-2 text-white hover:text-yellow-400" @click="toggleAuthModal">
+            <a v-show="isAuthenticated == false" class="px-2 text-white hover:text-yellow-400" @click="toggleAuthModal">
               Login / Register
               </a>
-              <a  v-show="$store.state.isAuthenticated === true" class="px-2 text-white hover:text-yellow-400" @click="toggleAuthModal">
+              <a  v-show="isAuthenticated == true" class="px-2 text-white hover:text-yellow-400" @click="toggleAuthModal">
               <p @click="logout()"><span>Logout</span> </p>
               </a>
           </li>
@@ -35,16 +35,22 @@ export default {
     name:"Navbar",
     data(){
       return{
-        isAuthenticated:this.$store.state.isAuthenticated,
+      }
+    },computed:{
+      isAuthenticated(){
+        return this.$store.state.isAuthenticated 
       }
     },
     methods:{
         ...mapMutations(['toggleAuthModal']),
         logout() {
-  if(this.isAuthenticated=== false) {
+          console.log(this.isAuthenticated)
+  if(this.isAuthenticated== true) {
     // If not authenticated, add a path where to redirect after login.
     this.$store.commit('toggleAuthenticated')
     this.$router.push({ name: 'Home' });
+    localStorage.removeItem("accessToken") 
+    localStorage.removeItem("refreshToken")
     // window.location.reload();
   }
 },

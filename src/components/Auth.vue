@@ -415,6 +415,8 @@ export default {
           //       path: '/search',
           //   })
           console.log(response)
+          localStorage.refreshToken = response.data.refresh_token
+          localStorage.accessToken = response.data.access_token 
           vm.$store.commit('toggleAuthenticated')
           vm.isAuthenticated = true
           vm.onLinkClicked()

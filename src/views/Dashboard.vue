@@ -127,8 +127,8 @@
           <div v-show="isVisible==='profile'">
         <Profile/>
       </div>
-      <div v-show="isVisible==='products'" class="md:px-16 gap-8 grid md:grid-cols-4  2xl:grid-cols-6">
-          <Products v-for="product in products" :key="product"/>
+      <div v-show="isVisible==='products'" class="md:px-16">
+          <ProductFinal />
       </div>
       
       <div class="" v-show="isVisible==='statistics'">
@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import Products from '../components/Products.vue'
+import ProductFinal from '../components/ProductFinal.vue'
 import Profile from '../components/Profile.vue'
 import Statistics from '../components/Statistics.vue'
 import Supplier from '../components/Supplier.vue'
@@ -162,7 +162,7 @@ data(){
     }
 },
 components:{
-  Products,
+  ProductFinal,
   Profile,
   Statistics,
   Supplier
