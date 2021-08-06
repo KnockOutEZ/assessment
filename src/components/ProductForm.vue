@@ -1,11 +1,14 @@
 <template>
-  <div class="grid grid-cols-5">
+<h1></h1>
+  <div class="grid md:grid-cols-5 ml-3">
       
-      <div>Name <br><input type="text" placeholder=""></div>
-      <div>Name <br><input type="text" placeholder=""></div>
-      <div>Name <br><input type="text" placeholder=""></div>
-      <div>Name <br><input type="text" placeholder=""></div>
+      <div>Title <br><input type="text" placeholder=""></div>
+      <div>Sku <br><input type="text" placeholder=""></div>
+      <div>Unit Price <br><input type="text" placeholder=""></div>
+      <div>Currency <br><input type="text" placeholder=""></div>
+      <div class="grid grid-cols-3">
       <div><br><button class="bg-green-400 rounded-lg w-12 h-8  -mt-3">Save</button></div>
+      </div>
   </div>
 </template>
 

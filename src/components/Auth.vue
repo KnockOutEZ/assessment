@@ -155,7 +155,7 @@
                 hover:bg-purple-700
               "
             >
-              Submit
+              <span @click="toggleAuthModal">Submit</span>
             </button>
           </vee-form>
           <!-- Registration Form -->
@@ -336,7 +336,7 @@
                 hover:bg-purple-700
               "
             >
-              Submit
+              <span @click="toggleAuthModal">Submit</span>
             </button>
           </vee-form>
         </div>
@@ -389,8 +389,10 @@ export default {
         .then(function(response) {
           //handle success
           console.log(response);
-          vm.isAuthenticated = true
+          localStorage.refreshToken = response.data.refresh_token
+          localStorage.accessToken = response.data.access_token 
           vm.$store.commit('toggleAuthenticated')
+          vm.isAuthenticated = true
           vm.onLinkClicked()
         })
         .catch(function(response) {
@@ -414,7 +416,7 @@ export default {
           // this.$router.push({
           //       path: '/search',
           //   })
-          console.log(response)
+          console.log(response);
           localStorage.refreshToken = response.data.refresh_token
           localStorage.accessToken = response.data.access_token 
           vm.$store.commit('toggleAuthenticated')

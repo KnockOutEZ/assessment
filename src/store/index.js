@@ -7,7 +7,7 @@ export default createStore({
     isAuthenticated: localStorage.Authenticator=='true',
     // isAuthenticated: false,
     // url:'http://3.1.103.18/products',
-    // customers:[]
+    // productss:[]
   },
   mutations: {
     toggleAuthModal: (state) => {
@@ -18,9 +18,9 @@ export default createStore({
       localStorage.Authenticator = !state.isAuthenticated
       state.isAuthenticated = !state.isAuthenticated
     },
-    // getCustomers(state){
+    // getproductss(state){
     //   axios.get(state.url).then(data=>{
-    //     this.customers = data.quantity
+    //     this.productss = data.quantity
     //     console.log(data.quantity)
     //   })
     // }

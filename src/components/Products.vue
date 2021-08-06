@@ -7,21 +7,24 @@
       <table class="w-full text-md bg-white shadow-md rounded mb-4">
         <tbody>
           <tr class="border-b">
-            <th class="text-left p-3 px-5">Name</th>
-            <th class="text-left p-3 px-5">Email</th>
-            <th class="text-left p-3 px-5">Role</th>
+            <th class="text-left p-3 px-5">Sl</th>
+            <th class="text-left p-3 px-5">Title</th>
+            <th class="text-left p-3 px-5">Sku</th>
+            <th class="text-left p-3 px-5">Price</th>
             <th></th>
           </tr>
-
-          <tr  v-for="customer in customers" :key="customer.id" class="border-b hover:bg-orange-100 bg-gray-100">
+          <tr  v-for="(product,index) in products" :key="product.id" class="border-b hover:bg-orange-100 bg-gray-100">
             <td class="p-3 px-5">
-              <input type="text" :value="customer.title" class="bg-transparent" />
+              {{index + 1}}
             </td>
             <td class="p-3 px-5">
-              <input type="text" value="user.email" class="bg-transparent" />
+              {{product.title}}
             </td>
             <td class="p-3 px-5">
-              <input type="text" value="user.email" class="bg-transparent" />
+              {{product.sku}}
+            </td>
+            <td class="p-3 px-5">
+              {{product.unit_price}} {{product.currency}}
             </td>
             <td class="p-3 px-5 flex justify-end">
               <button
@@ -39,8 +42,8 @@
                   focus:shadow-outline
                 "
               >
-                Save</button
-              ><button
+                Edit</button
+              ><button @click="Ondelete()"
                 type="button"
                 class="
                   text-sm
@@ -85,11 +88,15 @@ export default {
   name: "Products",
   data(){
     return{
-      products:20
+    }
+  },
+  methods:{
+    Ondelete(){
+      window.console.log(this.products[0].id)
     }
   },
   props:{
-    customers:{
+    products:{
       type:Array
     }
   }
