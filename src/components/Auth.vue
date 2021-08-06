@@ -306,8 +306,8 @@
                   rounded
                 "
               >
-                <option value="true">Supplier</option>
-                <option value="false">Company User</option>
+                <option value="1">Supplier</option>
+                <option value="0">Company User</option>
               </vee-field>
               <ErrorMessage class="text-red-600" name="isSupplier" />
             </div>
