@@ -33,7 +33,8 @@
                   </span>
                 </a>
               </li> -->
-              <li class="mb-6">
+              <!-- <h1>{{isSupplier}}</h1> -->
+              <li class="mb-6" v-if="isSupplier=='true'">
                 <a @click="isVisible='statistics'">
                   <span>
                     <svg
@@ -75,7 +76,7 @@
                 </a>
               </li>
               <li class="mb-6">
-                <a @click="isVisible='products'">
+                <a @click="isVisible='products'" v-if="isSupplier=='true'">
                   <span>
                     <svg
                       class="fill-current h-5 w-5 text-gray-300 mx-auto hover:text-green-500"
@@ -91,9 +92,25 @@
                 </a>
               </li>
               <li class="mb-6">
-                <a @click="isVisible='suppliers'">
-                  <span class="fill-current h-5 w-5 text-gray-300 mx-auto hover:text-green-500 flex justify-center">
-                    <i class="fas float-center fa-users"></i>
+                <a @click="isVisible='suppliers'" v-if="isSupplier=='false'">
+                  <span>
+                    <svg
+                      class="fill-current h-5 w-5 text-gray-300 mx-auto hover:text-green-500"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 13H7v5h5v2H5V10h2v1h5v2M8
+                          4v2H4V4h4m2-2H2v6h8V2m10 9v2h-4v-2h4m2-2h-8v6h8V9m-2
+                          9v2h-4v-2h4m2-2h-8v6h8v-6z"
+                      ></path>
+                    </svg>
+                  </span>
+                </a>
+              </li>
+              <li class="mb-6 ml-6">
+                <a @click="isVisible='orders'" v-if="isSupplier=='false'">
+                  <span class="text-gray-300 hover:text-green-600">
+                    <i class="fa fa-shopping-cart"></i>
                   </span>
                 </a>
               </li>
@@ -131,12 +148,48 @@
           <ProductFinal />
       </div>
       
-      <div class="" v-show="isVisible==='statistics'">
+      <div class="" v-show="isVisible==='statistics'" v-if="isSupplier=='true'">
         <Statistics/>
       </div>
 
+      <div class="" v-show="isVisible==='orders'">
+        <Orders/>
+      </div>
+
       <div v-show="isVisible==='suppliers'" class="md:px-16 gap-8 grid md:grid-cols-4  2xl:grid-cols-6">
-        <Supplier v-for="supplier in suppliers" :key="supplier"/>
+        <!-- <Supplier v-for="supplier in suppliers" :key="supplier"/> -->
+        <div v-for="supplier in suppliers" :key="supplier" class="wrapper antialiased text-gray-900 my-10 hover:shadow-xl">
+          <div>
+    
+    <img src="../images/Kachamorich.jpg" alt=" random imgee" class="z-1 w-2/4 mx-auto object-cover object-center rounded-full shadow-md">    
+    
+ <div class="relative z-2">
+   <div class="bg-white p-6 rounded-b-lg shadow-lg">
+    <div class="flex items-baseline">
+      <span class="bg-green-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+        New
+      </span>
+      <!-- <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+    2 baths  &bull; 3 rooms
+  </div>   -->
+    </div>
+    
+    <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{supplier.title}}</h4>
+ 
+  <div class="mt-1">
+    {{supplier.unit_price}}
+    <span class="text-gray-600 text-sm">{{supplier.currency}}</span>
+  </div>
+  <div class="mt-4">
+    <span class="text-green-600 text-md font-semibold">sku:{{supplier.sku}} </span>
+    <!-- <span class="text-sm text-gray-600">(based on 234 ratings)</span> -->
+  </div>
+  <button class="text-white w-full hover:shadow-lg hover:bg-red-700 bg-red-600 mx-auto flex justify-center py-2 rounded-lg mt-2"><i class="fa fa-shopping-cart"></i></button>
+  </div>
+ </div>
+  
+</div>
+  </div>
       </div>
   </section>
       </div>
@@ -150,22 +203,92 @@
 import ProductFinal from '../components/ProductFinal.vue'
 import Profile from '../components/Profile.vue'
 import Statistics from '../components/Statistics.vue'
-import Supplier from '../components/Supplier.vue'
+import Orders from '../components/Orders.vue'
+import axios from "axios";
+
 
 export default {
 name:'Dashboard',
 data(){
     return {
-        products:30,
-        suppliers:20,
-        isVisible:"statistics"
+        isSupplier:localStorage.isSupplier,
+        isVisible:"statistics",
+        suppliers:[]
     }
+},
+created(){
+  if(localStorage.getItem("isSupplier") != null){
+        this.isSupplier=localStorage.isSupplier
+      }
+  this.getproducts()
+},
+methods:{
+  getproducts() {
+      // axios.get(vm.url).then((response)=>{
+      //   vm.productss = response.data.count
+      //   console.log('response')
+      // })
+      console.log(localStorage.accessToken);
+      var vm = this;
+      axios({
+        method: "GET",
+        validateStatus: false,
+        url: vm.$BaseUrl + "products",
+        headers: { token: localStorage.accessToken },
+      })
+        .then(function (response) {
+          console.log(response.status);
+          if (response.status == 404) {
+            vm.suppliers = [];
+          } else {
+            vm.suppliers = response.data.products;
+          }
+          console.log(response.data.products);
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
+    },
+
+    // createOrder() {
+    //   var vm = this;
+    //   axios({
+    //     method: "Post",
+    //     url: "http://3.1.103.18/orders",
+    //     validateStatus: false,
+    //     data: {
+    //       title: this.title,
+    //       sku: this.sku,
+    //       unit_price: this.price,
+    //       currency: this.currency,
+    //       supplier_id: localStorage.userID,
+    //     },
+    //     headers: { token: localStorage.accessToken },
+    //   })
+    //     .then(function (response) {
+    //       if (response.status == 400) {
+    //         window.alert(response.data.error);
+    //       } else {
+    //         vm.getproducts();
+    //         vm.title = "";
+    //         vm.sku = "";
+    //         vm.price = "";
+    //         vm.currency = "";
+    //       }
+    //       //handle success
+    //     })
+    //     .catch(function (response) {
+    //       //handle error
+    //       console.log(response);
+    //     });
+    // },
 },
 components:{
   ProductFinal,
   Profile,
   Statistics,
-  Supplier
+  Orders,
   }
 }
 </script>

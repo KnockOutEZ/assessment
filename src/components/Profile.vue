@@ -66,7 +66,7 @@
                             src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
                             alt="">
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{name}}</h1>
                     <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
                     <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
                         consectetur adipisicing elit.
@@ -171,7 +171,7 @@
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email.</div>
                                 <div class="px-4 py-2">
-                                    <a class="text-blue-800" href="mailto:jane@example.com">jane@example.com</a>
+                                    <p class="text-blue-800">{{email}}</p>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
@@ -258,8 +258,39 @@
 </template>
 
 <script>
+import axios from "axios";
+
+
 export default {
-name:'Profile'
+name:'Profile',
+data(){
+    return{
+        name:'',
+        email:''
+    }
+},
+created(){
+    this.getProfileInfo()
+},
+methods:{
+    getProfileInfo(){
+        var vm = this
+        axios({
+        method: "GET",
+        validateStatus: false,
+        url: vm.$BaseUrl + "users/" + localStorage.userID,
+      })
+        .then(function (response) {
+          console.log(response)
+          vm.name = response.data.user.name
+          vm.email = response.data.user.email
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
+    }
+}
 }
 </script>
 
