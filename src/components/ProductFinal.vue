@@ -1,5 +1,5 @@
 <template>
-  <div class="grid md:grid-cols-5 ml-3">
+  <div class="grid md:grid-cols-5 px-10">
     <div>Title <br /><input type="text" v-model="title" placeholder="" /></div>
     <div>Sku <br /><input type="text" v-model="sku" placeholder="" /></div>
     <div>
@@ -11,7 +11,7 @@
     <div class="grid grid-cols-3">
       <div>
         <br /><button
-          class="bg-green-400 rounded-lg w-12 h-8 -mt-3"
+          class="bg-green-400 rounded-lg w-12 h-8 -mt-3 text-white"
           @click="createProduct"
         >
           Save
@@ -37,7 +37,7 @@
           <tr
             v-for="(product, index) in products"
             :key="product.id"
-            class="border-b hover:bg-orange-100 bg-gray-100"
+            class="border-b hover:bg-gray-200 bg-gray-100"
           >
             <td class="p-3 px-5">
               {{ index + 1 }}

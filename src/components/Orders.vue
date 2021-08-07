@@ -10,20 +10,29 @@
           <tr class="border-b">
             <th class="text-left p-3 px-5">Sl</th>
             <th class="text-left p-3 px-5">Title</th>
-            <th class="text-left p-3 px-5">Sku</th>
-            <th class="text-left p-3 px-5">Price</th>
+            <!-- <th class="text-left p-3 px-5">Sku</th>
+            <th class="text-left p-3 px-5">Price</th> -->
             <th></th>
           </tr>
           <tr
             v-for="(product, index) in order_list"
             :key="product.id"
-            class="border-b hover:bg-orange-100 bg-gray-100"
+            class="border-b bg-gray-100 hover:bg-gray-200"
           >
             <td class="p-3 px-5">
               {{ index + 1 }}
             </td>
             <td class="p-3 px-5">
               {{ product.title }}
+            </td>
+            <td class="p-3 px-5">
+              {{ product.sku }}
+            </td>
+            <td class="p-3 px-5">
+              {{ product.sku }}
+            </td>
+            <td class="p-3 px-5">
+              {{ product.sku }}
             </td>
             <td class="p-3 px-5">
               {{ product.sku }}

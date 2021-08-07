@@ -19,6 +19,11 @@
               <p @click="logout()"><span>Logout</span> </p>
               </a>
           </li>
+          <li class="ml-5">
+            <router-link to="/dashboard">
+                <a class="px-2 text-white hover:text-yellow-400 my-auto" v-show="isAuthenticated == true"><p>Dashboard</p></a>              
+              </router-link>
+          </li>
           <!-- <li>
             <a class="px-2 text-white" href="#">Manage</a>
           </li> -->

@@ -58,39 +58,39 @@ export default {
     // Add data
     chart1.data = [
       {
-        country: "Lithuania",
+        country: "Jeans",
         litres: 501.9,
       },
       {
-        country: "Czechia",
+        country: "Hoodies",
         litres: 301.9,
       },
       {
-        country: "Ireland",
+        country: "T-shirts",
         litres: 201.1,
       },
       {
-        country: "Germany",
+        country: "Sweater",
         litres: 165.8,
       },
       {
-        country: "Australia",
+        country: "Flip-flops",
         litres: 139.9,
       },
       {
-        country: "Austria",
+        country: "Shorts",
         litres: 128.3,
       },
       {
-        country: "UK",
+        country: "Skirt",
         litres: 99,
       },
       {
-        country: "Belgium",
+        country: "Swimsuit",
         litres: 60,
       },
       {
-        country: "The Netherlands",
+        country: "Jacket",
         litres: 50,
       },
     ];

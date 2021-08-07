@@ -111,7 +111,7 @@ a:hover {
   animation: slide 50s linear infinite;
   will-change: background-position;
   z-index: -1;
-  height: 40vh;
+  height: 45vh;
 }
 
 #playlist li:first-child {
