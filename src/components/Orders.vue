@@ -15,7 +15,7 @@
             <th></th>
           </tr>
           <tr
-            v-for="(product, index) in products"
+            v-for="(product, index) in order_list"
             :key="product.id"
             class="border-b hover:bg-orange-100 bg-gray-100"
           >
@@ -59,6 +59,7 @@
 
 <script>
 // import axios from "axios";
+import axios from "axios";
 
 export default {
 name:"Orders",
@@ -69,11 +70,50 @@ data() {
       sku: "",
       price: "",
       currency: "",
+      order_list: []
     };
   },
-  // created() {
-  //   this.getproducts();
-  // },
+  created() {
+     this.view_order();
+  },
+  methods: {
+    view_order(){
+      var vm = this;
+      axios({
+        method: "GET",
+        validateStatus: false,
+        url: vm.$BaseUrl + "orders",
+        headers: { token: localStorage.accessToken },
+      })
+        .then(function (response) {
+          if(response.data.orders){
+            vm.order_list = response.data.orders;
+            console.log('orders', response.data.orders);
+          }
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
+    },
+    Ondelete(product_id){
+      var vm = this;
+      axios({
+        method: "DELETE",
+        validateStatus: false,
+        url: vm.$BaseUrl + "orders/"+product_id,
+        headers: { token: localStorage.accessToken },
+      })
+        .then(function (response) {
+          console.log(response.data);
+          vm.view_order();
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
+    }
+  }
 
   // methods: {
   //   createProduct() {
