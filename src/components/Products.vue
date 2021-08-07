@@ -43,7 +43,7 @@
                 "
               >
                 Edit</button
-              ><button @click="Ondelete()"
+              ><button @click="Ondelete(product.id)"
                 type="button"
                 class="
                   text-sm
@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Products",
   data(){
@@ -91,8 +93,25 @@ export default {
     }
   },
   methods:{
-    Ondelete(){
-      window.console.log(this.products[0].id)
+    Ondelete(id){
+      const deleteConfirm = window.confirm("Are you sure you want to delete this product?")
+      if(deleteConfirm){
+        axios({
+        method: "Delete",
+        url: "http://3.1.103.18/products/" + id,
+        headers: { token: localStorage.accessToken },
+      })
+        .then(function (response) {
+          
+          //handle success
+          getproducts()
+          console.log(response);
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
+      }
     }
   },
   props:{

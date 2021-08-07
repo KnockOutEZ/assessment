@@ -13,14 +13,15 @@ const routes = [
     path:'/dashboard',
     name:'Dashboard',
     component: Dashboard,
-    // beforeEnter:(to,from,next)=>{
-    //   if(this.$store.state.isAuthenticated===false){
-    //     next('/')
-    //   }
-    //   else{
-    //     next()
-    //   }
-    // }
+    beforeEnter:(to,from,next)=>{
+      if(localStorage.getItem("accessToken") === null){
+        this.$routes.push('Home');
+      }
+      else{
+        next()
+      }
+    }
+    
   }
 ]
 

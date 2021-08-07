@@ -51,6 +51,8 @@ export default {
     this.$router.push({ name: 'Home' });
     localStorage.removeItem("accessToken") 
     localStorage.removeItem("refreshToken")
+    localStorage.removeItem("isSupplier")
+    localStorage.removeItem("userID")
     // window.location.reload();
   }
 },
