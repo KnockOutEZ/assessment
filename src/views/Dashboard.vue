@@ -163,7 +163,7 @@
     <span class="text-green-600 text-md font-semibold">sku:{{supplier.sku}} </span>
     <!-- <span class="text-sm text-gray-600">(based on 234 ratings)</span> -->
   </div>
-  <button @click="add_to_cart(supplier)" class="text-white w-full hover:shadow-lg hover:bg-red-700 bg-red-600 mx-auto flex justify-center py-2 rounded-lg mt-2"><i class="fa fa-shopping-cart"></i></button>
+  <button @click="add_to_cart(supplier)" class="text-white w-full hover:shadow-lg bg-red-600 mx-auto flex justify-center py-2 rounded-lg mt-2 cartbtn"><i class="fa fa-shopping-cart"></i></button>
   </div>
  </div>
   
@@ -191,7 +191,7 @@ name:'Dashboard',
 data(){
     return {
         isSupplier:localStorage.isSupplier,
-        isVisible:"statistics",
+        isVisible:"",
         suppliers:[]
     }
 },
@@ -199,7 +199,15 @@ created(){
   if(localStorage.getItem("isSupplier") != null){
         this.isSupplier=localStorage.isSupplier
       }
+      if(localStorage.isSupplier == "false"){
+        this.isVisible="profile"
+      }
+      else{
+        this.isVisible="statistics"
+      }
   this.getproducts()
+  
+  console.log(this.isVisible)
 },
 methods:{
   getproducts() {
@@ -252,6 +260,7 @@ methods:{
           } else {
             console.log(response.data)
           }
+          
           //handle success
         })
         .catch(function (response) {
@@ -304,6 +313,10 @@ components:{
 </script>
 
 <style scoped>
+
+.cartbtn:active{
+  background: rgb(161, 0, 0);
+}
 .body{
     overflow-y: hidden;
 }

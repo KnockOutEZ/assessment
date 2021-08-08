@@ -8,6 +8,7 @@
     <div>
       Currency <br /><input type="text" v-model="currency" placeholder="" />
     </div>
+    <input type="hidden" v-model="editProductID">
     <div class="grid grid-cols-3">
       <div>
         <br /><button
@@ -105,6 +106,7 @@ export default {
       sku: "",
       price: "",
       currency: "",
+      editProductID:""
     };
   },
   components: {},
@@ -114,7 +116,8 @@ export default {
   methods: {
     createProduct() {
       var vm = this;
-      axios({
+      if(vm.editProductID == ""){
+        axios({
         method: "Post",
         url: "http://3.1.103.18/products",
         validateStatus: false,
@@ -143,6 +146,10 @@ export default {
           //handle error
           console.log(response);
         });
+      }
+      else{
+         vm.updateProduct(vm.editProductID);
+      }
     },
 
     Ondelete(id) {
@@ -182,8 +189,9 @@ export default {
             vm.sku = response.data.product.sku;
             vm.price = response.data.product.unit_price;
             vm.currency = response.data.product.currency;
+            vm.editProductID = response.data.product.id;
           }
-          vm.updateProduct(id);
+         
         })
         .catch(function (response) {
           //handle error
@@ -234,6 +242,10 @@ export default {
         .then(function () {
           //handle success
           vm.getproducts();
+          vm.title = "";
+          vm.sku = "";
+          vm.price = "";
+          vm.currency = "";
         })
         .catch(function (response) {
           //handle error
